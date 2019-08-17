@@ -9,9 +9,9 @@
 				labels: [['Eating', 'Dinner'], ['Drinking', 'Water'], 'Sleeping', ['Designing', 'Graphics'], 'Coding', 'Cycling', 'Running'],
 				datasets: [{
 					label: 'My First dataset',
-					backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
-					borderColor: window.chartColors.red,
-					pointBackgroundColor: window.chartColors.red,
+					backgroundColor: 'rgba(255,0,0,0.3)',
+					borderColor:  'rgba(255,0,0,1)',
+					pointBackgroundColor:  'rgba(255,0,0,1)',
 					data: [
 						randomScalingFactor(),
 						randomScalingFactor(),
@@ -23,9 +23,9 @@
 					]
 				}, {
 					label: 'My Second dataset',
-					backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
-					borderColor: window.chartColors.blue,
-					pointBackgroundColor: window.chartColors.blue,
+					backgroundColor: 'rgba(255,0,0,0.3)',
+					borderColor:  'rgba(255,0,0,1)',
+					pointBackgroundColor:  'rgba(255,0,0,1)',
 					data: [
 						randomScalingFactor(),
 						randomScalingFactor(),
