@@ -27,8 +27,7 @@ looker.plugins.visualizations.add({
 			return Math.round(Math.random() * 100);
 		};
 
-		var color = Chart.helpers.color;
-		var config = {
+		var radar_config = {
 			type: 'radar',
 			data: {
 				labels: [['Eating', 'Dinner'], ['Drinking', 'Water'], 'Sleeping', ['Designing', 'Graphics'], 'Coding', 'Cycling', 'Running'],
@@ -78,7 +77,22 @@ looker.plugins.visualizations.add({
 			}
 		};
 
-			var myRadar = new Chart(element, config);
+		
+		    element.innerHTML = `
+      <style>
+ 
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+      </style>
+    `;
+
+    // Create a container element to let us center the text.
+    var canvas = element.appendChild(document.createElement("canvas"));
+		
+	var myRadar = new Chart(canvas, radar_config);
 	//	  var container = 	element.appendChild(myRadar);
   
   
