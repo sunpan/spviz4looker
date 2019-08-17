@@ -1,4 +1,29 @@
-	var randomScalingFactor = function() {
+
+
+
+
+looker.plugins.visualizations.add({
+  // Id and Label are legacy properties that no longer have any function besides documenting
+  // what the visualization used to have. The properties are now set via the manifest
+  // form within the admin/visualizations page of Looker
+  id: "spviz_radar",
+  label: "spviz_radar",
+  options: {
+    font_size: {
+      type: "string",
+      label: "Font Size",
+      values: [
+        {"Large": "large"},
+        {"Small": "small"}
+      ],
+      display: "radio",
+      default: "large"
+    }
+  },
+  // Set up the initial state of the visualization
+  create: function(element, config) {
+
+  	var randomScalingFactor = function() {
 			return Math.round(Math.random() * 100);
 		};
 
@@ -53,33 +78,8 @@
 			}
 		};
 
-
-
-
-looker.plugins.visualizations.add({
-  // Id and Label are legacy properties that no longer have any function besides documenting
-  // what the visualization used to have. The properties are now set via the manifest
-  // form within the admin/visualizations page of Looker
-  id: "spviz_radar",
-  label: "spviz_radar",
-  options: {
-    font_size: {
-      type: "string",
-      label: "Font Size",
-      values: [
-        {"Large": "large"},
-        {"Small": "small"}
-      ],
-      display: "radio",
-      default: "large"
-    }
-  },
-  // Set up the initial state of the visualization
-  create: function(element, config) {
-
-  
-			var myRadar = new Chart(document.getElementById('canvas'), config);
-		  var container = 	element.appendChild(myRadar);
+			var myRadar = new Chart(element, config);
+	//	  var container = 	element.appendChild(myRadar);
   
   
     // Insert a <style> tag with some styles we'll use later.
@@ -99,6 +99,8 @@ looker.plugins.visualizations.add({
     // Clear any errors from previous updates
     this.clearErrors();
 
+	
+	/*
     // Throw some errors and exit if the shape of the data isn't what this chart needs
     if (queryResponse.fields.dimensions.length == 0) {
       this.addError({title: "No Dimensions", message: "This chart requires dimensions."});
@@ -118,7 +120,7 @@ looker.plugins.visualizations.add({
     } else {
       this._textElement.className = "hello-world-text-large";
     }
-
+*/
     // We are done rendering! Let Looker know.
     done()
   }
