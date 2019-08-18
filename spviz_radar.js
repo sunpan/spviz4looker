@@ -61,8 +61,7 @@ looker.plugins.visualizations.add({
 	window.aa.queryResponse=queryResponse;
 	window.aa.details=details;
 	
-	
-	/*
+
 	  	var randomScalingFactor = function() {
 			return Math.round(Math.random() * 100);
 		};
@@ -71,35 +70,7 @@ looker.plugins.visualizations.add({
 			type: 'radar',
 			data: {
 				labels: [],
-				datasets: [{
-					label: 'My First dataset',
-					backgroundColor: 'rgba(255,0,0,0.3)',
-					borderColor:  'rgba(255,0,0,1)',
-					pointBackgroundColor:  'rgba(255,0,0,1)',
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					]
-				}, {
-					label: 'My Second dataset',
-					backgroundColor: 'rgba(255,0,0,0.3)',
-					borderColor:  'rgba(255,0,0,1)',
-					pointBackgroundColor:  'rgba(255,0,0,1)',
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					]
-				}]
+				datasets: []
 			},
 			options: {
 				legend: {
@@ -117,8 +88,11 @@ looker.plugins.visualizations.add({
 			}
 		};
 	
+
 	
-	*/
+
+	
+	
 	  queryResponse.fields.measure_like.forEach(function(field) {
 			radar_config.data.labels.push(field.name);
      })
@@ -128,16 +102,21 @@ looker.plugins.visualizations.add({
 	 for (const row of data) {
 		 
 		 
-		var dataset={};
+		var dataset={label:null,data:[]};
 		
 	
 		 queryResponse.fields.dimensions.forEach(function(field) {
-				radar_config.data.labels.push(field.name);
 				dataset.label=dataset.label==null?"":(dataset.label+" ");
 				dataset.label=dataset.label+row[field.name];
 		 })
 		
-		dataset.data: [
+		 queryResponse.fields.measure_like.forEach(function(field) {
+			dataset.data.push(row[field.name]);
+		 })
+		 
+		 
+		 
+		dataset.data=[
 						randomScalingFactor(),
 						randomScalingFactor(),
 						randomScalingFactor(),
