@@ -1,7 +1,6 @@
 
 
 
-
 looker.plugins.visualizations.add({
   // Id and Label are legacy properties that no longer have any function besides documenting
   // what the visualization used to have. The properties are now set via the manifest
@@ -56,12 +55,9 @@ looker.plugins.visualizations.add({
       return;
     }
 
+ var spviz_radar_colors=['#dd3333', '#80ce5d', '#f78131', '#369dc1', '#c572d3', '#36c1b3', '#b57052', '#ed69af'];
 
-	window.aa={};
-	window.aa.data=data;
-	window.aa.config=config;
-	window.aa.queryResponse=queryResponse;
-	window.aa.details=details;
+
 	
 
 	  	var randomScalingFactor = function() {
@@ -100,7 +96,6 @@ looker.plugins.visualizations.add({
      })
 		 
 	
-	
 	 for (const row of data) {
 		 
 		 
@@ -119,6 +114,9 @@ looker.plugins.visualizations.add({
 		 queryResponse.fields.measure_like.forEach(function(field) {
 			dataset.data.push(row[field.name].value);
 		 })
+		 
+		 
+		dataset.borderColor=spviz_radar_colors[radar_config.data.datasets.length % spviz_radar_colors.length];
 		 
 
 		radar_config.data.datasets.push(dataset);
