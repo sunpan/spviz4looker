@@ -104,7 +104,11 @@ looker.plugins.visualizations.add({
 	 for (const row of data) {
 		 
 		 
-		var dataset={label:null,data:[]};
+		var dataset={
+			label:null,
+			backgroundColor: 'rgba(0,0,0,0)',
+			data:[]
+			};
 		
 	
 		 queryResponse.fields.dimensions.forEach(function(field) {
@@ -116,17 +120,7 @@ looker.plugins.visualizations.add({
 			dataset.data.push(row[field.name].value);
 		 })
 		 
-		 
-		 /*
-		dataset.data=[
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					]*/
+
 		radar_config.data.datasets.push(dataset);
 	  
       }
