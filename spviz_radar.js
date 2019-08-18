@@ -22,8 +22,41 @@ looker.plugins.visualizations.add({
   },
   // Set up the initial state of the visualization
   create: function(element, config) {
+		
+    element.innerHTML = `
+      <style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+      </style>
+    `;
 
-  	var randomScalingFactor = function() {
+    // Create a container element to let us center the text.
+	element._radarcavas = element.appendChild(document.createElement("canvas"));
+	element._radar=null;
+	
+  },
+  // Render in response to the data or settings changing
+  updateAsync: function(data, element, config, queryResponse, details, done) {
+
+    // Clear any errors from previous updates
+    this.clearErrors();
+	
+	if(element._radar!=null&&element._radarcavas!=null)
+	{
+		element._radarcavas.removeChild(element._radar);
+		element._radar=null;
+	}
+
+	if (queryResponse.fields.dimensions.length == 0) {
+      this.addError({title: "No Dimensions", message: "This chart requires dimensions."});
+      return;
+    }
+	
+	
+	  	var randomScalingFactor = function() {
 			return Math.round(Math.random() * 100);
 		};
 
@@ -63,10 +96,10 @@ looker.plugins.visualizations.add({
 			},
 			options: {
 				legend: {
-					position: 'top',
+					position: 'bottom',
 				},
 				title: {
-					display: true,
+					display: false,
 					text: 'Chart.js Radar Chart'
 				},
 				scale: {
@@ -76,43 +109,15 @@ looker.plugins.visualizations.add({
 				}
 			}
 		};
-
-		
-		    element.innerHTML = `
-      <style>
- 
-		canvas {
-			-moz-user-select: none;
-			-webkit-user-select: none;
-			-ms-user-select: none;
-		}
-      </style>
-    `;
-
-    // Create a container element to let us center the text.
-    var canvas = element.appendChild(document.createElement("canvas"));
-		
-	var myRadar = new Chart(canvas, radar_config);
-	//	  var container = 	element.appendChild(myRadar);
-  
-  
-    // Insert a <style> tag with some styles we'll use later.
-
-
-    // Create a container element to let us center the text.
-   // var container = element.appendChild(document.createElement("div"));
-  //  container.className = "hello-world-vis";
-
-    // Create an element to contain the text.
- //   this._textElement = container.appendChild(document.createElement("div"));
-
-  },
-  // Render in response to the data or settings changing
-  updateAsync: function(data, element, config, queryResponse, details, done) {
-
-    // Clear any errors from previous updates
-    this.clearErrors();
-
+	
+	
+	
+	
+	element._radar = new Chart(element._radarcavas, radar_config);
+	
+	
+	
+	
 	
 	/*
     // Throw some errors and exit if the shape of the data isn't what this chart needs
