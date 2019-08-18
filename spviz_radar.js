@@ -50,12 +50,22 @@ looker.plugins.visualizations.add({
 		element._radar=null;
 	}
 
-	if (queryResponse.fields.dimensions.length == 0) {
-      this.addError({title: "No Dimensions", message: "This chart requires dimensions."});
-      return;
-    }
+	//if (queryResponse.fields.dimensions.length == 0) {
+    //  this.addError({title: "No Dimensions", message: "This chart requires dimensions."});
+     // return;
+   // }
+	 if (!handleErrors(this, queryResponse, {
+      min_pivots: 0, max_pivots: 0,
+      min_dimensions: 1, max_dimensions: Infinity,
+      min_measures: 1, max_measures: Infinity
+    })) return
+	window.xxdata=data;
+	window.xxqueryResponse=config;
+	window.xxqueryResponse=queryResponse;
+	window.xxqueryResponse=details;
 	
 	
+	/*
 	  	var randomScalingFactor = function() {
 			return Math.round(Math.random() * 100);
 		};
@@ -63,7 +73,7 @@ looker.plugins.visualizations.add({
 		var radar_config = {
 			type: 'radar',
 			data: {
-				labels: [['Eating', 'Dinner'], ['Drinking', 'Water']],
+				labels: [],
 				datasets: [{
 					label: 'My First dataset',
 					backgroundColor: 'rgba(255,0,0,0.3)',
@@ -112,17 +122,53 @@ looker.plugins.visualizations.add({
 	
 	
 	
-	   queryResponse.fields.measure_like.forEach(function(field) {
+	  queryResponse.fields.measure_like.forEach(function(field) {
 			radar_config.data.labels.push(field.name);
-   
      })
+		 
 	
 	
+	 for (const row of data) {
+		 
+		 
+		var dataset={};
+		
+	
+		 queryResponse.fields.dimensions.forEach(function(field) {
+				radar_config.data.labels.push(field.name);
+				dataset.label=dataset.label+field.name
+		 })
+			
+	
+	 
+      for (const key of Object.keys(row)) {
+        const cell = row[key] as Cell
+        const cellValue = htmlForCell(cell)
+		
+	  }
+	  
+		dataset.label='xxx';
+		
+		
+		
+		
+		dataset.data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					]
+		radar_config.data.datasets.push(dataset);
+	  
+      }
 	
 	
 	element._radar = new Chart(element._radarcavas, radar_config);
 	
-	
+	*/
 	
 	
 	
