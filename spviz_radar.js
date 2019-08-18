@@ -63,7 +63,7 @@ looker.plugins.visualizations.add({
 		var radar_config = {
 			type: 'radar',
 			data: {
-				labels: [['Eating', 'Dinner'], ['Drinking', 'Water'], 'Sleeping', ['Designing', 'Graphics'], 'Coding', 'Cycling', 'Running'],
+				labels: [['Eating', 'Dinner'], ['Drinking', 'Water']],
 				datasets: [{
 					label: 'My First dataset',
 					backgroundColor: 'rgba(255,0,0,0.3)',
@@ -109,6 +109,13 @@ looker.plugins.visualizations.add({
 				}
 			}
 		};
+	
+	
+	
+	   queryResponse.fields.measure_like.forEach(function(field) {
+			radar_config.data.labels.push(field.name);
+   
+     })
 	
 	
 	
