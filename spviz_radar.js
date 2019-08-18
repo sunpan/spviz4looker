@@ -59,10 +59,11 @@ looker.plugins.visualizations.add({
       min_dimensions: 1, max_dimensions: Infinity,
       min_measures: 1, max_measures: Infinity
     })) return
-	window.xxdata=data;
-	window.xxqueryResponse=config;
-	window.xxqueryResponse=queryResponse;
-	window.xxqueryResponse=details;
+	window.aa={};
+	window.aa.data=data;
+	window.aa.config=config;
+	window.aa.queryResponse=queryResponse;
+	window.aa.details=details;
 	
 	
 	/*
