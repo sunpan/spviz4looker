@@ -44,9 +44,6 @@ looker.plugins.visualizations.add({
     // Clear any errors from previous updates
     this.clearErrors();
 	
-    const htmlForCell = (cell: Cell) => {
-      return cell.html ? LookerCharts.Utils.htmlForCell(cell) : cell.value
-    }
 
 	if(element._radarcavas!=null)
 	{
@@ -112,7 +109,7 @@ looker.plugins.visualizations.add({
 	
 		 queryResponse.fields.dimensions.forEach(function(field) {
 				dataset.label=dataset.label==null?"":(dataset.label+" ");
-				dataset.label=dataset.label+htmlForCell(row[field.name]);
+				dataset.label=dataset.label+row[field.name].value;
 		 })
 		
 		 queryResponse.fields.measure_like.forEach(function(field) {
