@@ -44,9 +44,14 @@ looker.plugins.visualizations.add({
     // Clear any errors from previous updates
     this.clearErrors();
 	
-	if(element._radar!=null&&element._radarcavas!=null)
+    const htmlForCell = (cell: Cell) => {
+      return cell.html ? LookerCharts.Utils.htmlForCell(cell) : cell.value
+    }
+
+	if(element._radarcavas!=null)
 	{
-		element._radarcavas.removeChild(element._radar);
+		element.removeChild(element._radarcavas);
+		element._radarcavas = element.appendChild(document.createElement("canvas"));
 		element._radar=null;
 	}
 	if (queryResponse.fields.dimensions.length == 0) {
@@ -107,15 +112,15 @@ looker.plugins.visualizations.add({
 	
 		 queryResponse.fields.dimensions.forEach(function(field) {
 				dataset.label=dataset.label==null?"":(dataset.label+" ");
-				dataset.label=dataset.label+row[field.name];
+				dataset.label=dataset.label+htmlForCell(row[field.name]);
 		 })
 		
 		 queryResponse.fields.measure_like.forEach(function(field) {
-			dataset.data.push(row[field.name]);
+			dataset.data.push(row[field.name].value);
 		 })
 		 
 		 
-		 
+		 /*
 		dataset.data=[
 						randomScalingFactor(),
 						randomScalingFactor(),
@@ -124,7 +129,7 @@ looker.plugins.visualizations.add({
 						randomScalingFactor(),
 						randomScalingFactor(),
 						randomScalingFactor()
-					]
+					]*/
 		radar_config.data.datasets.push(dataset);
 	  
       }
